@@ -123,12 +123,12 @@ list_set_up = [
 rtol = 1e-7
 atol = 1e-10
 num_reps_per_file = 50
-all_violations = []
-all_errors_reading_files = []
 root_dir_results = Path("./results_check_parquet_file")
 shutil.rmtree(root_dir_results, ignore_errors=True)
 
 for name_df_lib in ["polars", "pandas"]:
+    all_violations = []
+    all_errors_reading_files = []
     print("##########################################################################################")
     print(f"loading parquet files created with {name_df_lib}:")
     print("##########################################################################################")

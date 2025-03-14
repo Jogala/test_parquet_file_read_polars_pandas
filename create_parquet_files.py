@@ -109,14 +109,6 @@ for key, paths in file_paths.items():
     print(f"First date: {test_df['date'].iloc[0]}")
     print(f"Length of first value array: {len(test_df['value'].iloc[0])}")
 
-    # Try to load with polars as well to ensure compatibility
-    try:
-        pl_df = pl.read_parquet(paths[0])
-        print("\nSuccessfully loaded with Polars")
-        print(f"Polars shape: {pl_df.shape}")
-    except Exception as e:
-        print(f"\nError loading with Polars: {e}")
-
     # Check original file
     meta = pq.read_metadata(paths[0])
     print(meta)
