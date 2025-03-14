@@ -1,0 +1,78 @@
+[tool.poetry]
+name = "analysis"
+version = "1.0.0"
+description = "analysis"
+readme = "README.md"
+authors = ["Joachim Rosenberger <jrosenberger@ilof.tech>"]
+
+# include the package and all sub packages in the src folder namespace
+packages = [{ include = "analysis" }]
+
+[tool.poetry.dependencies]
+python = "=3.12.8"
+numpy = "^1.4"
+polars = "^1.9.0"
+tqdm = "^4.66.5"
+matplotlib = "^3.9.2"
+seaborn = "^0.13.2"
+pandas = "^2.2.3"
+pyarrow = "^17.0.0"
+fastparquet = "^2024.11.0"
+
+[tool.poetry.group.test.dependencies]
+
+[tool.poetry.group.dev.dependencies]
+ipykernel = "^6.29.5"
+
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".git-rewrite",
+    ".hg",
+    ".ipynb_checkpoints",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pyenv",
+    ".pytest_cache",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    ".vscode",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "site-packages",
+    ".venv",
+    "venv",
+    ".vscode",
+    "scripts_allan",
+    "results",
+    "data",
+    "cache",
+]
+
+
+line-length = 120
+indent-width = 4
+target-version = "py312"
+
+[tool.ruff.lint]
+
+
+[tool.ruff.format]
+quote-style = "double"

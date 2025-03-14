@@ -1,0 +1,38 @@
+{
+    "editor.formatOnSave": true,
+    "[python]": {
+        "editor.defaultFormatter": "charliermarsh.ruff",
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": "explicit"
+        }
+    },
+    "ruff.nativeServer": true,
+    // "ruff.lint.args": [
+    //     "--config=./pyproject.toml"
+    // ],
+    "jupyter.notebookFileRoot": "${workspaceFolder}",
+    "files.associations": {
+        "*.log": "log"
+    },
+    "python.analysis.typeCheckingMode": "basic",
+    "python.analysis.diagnosticSeverityOverrides": {
+        "reportMissingTypeArgument": "error",
+        "reportMissingReturnType": "error",
+        "reportMissingImports": "none",
+        "reportMissingModuleSource": "none",
+        // Add other Pylance diagnostics you want to disable here
+    },
+    "python.analysis.exclude": [
+        "scripts_allan",
+        "data",
+        "cache",
+        "results",
+        "results_",
+        ".venv",
+        "**/__pycache__"
+    ],
+    "github.copilot.enable": {
+        "markdown": true
+    },
+    "markdown.preview.fontSize": 30,
+}
