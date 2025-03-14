@@ -69,7 +69,7 @@ def generate_parquet_file(file_idx: int, cache: bool) -> tuple[Path, Path]:
     df.to_parquet(file_path_pandas, index=False)
 
     file_path_polars.parent.mkdir(parents=True, exist_ok=True)
-    pl.from_pandas(df).write_parquet(file_path_polars)
+    pl.from_pandas(df).write_parquet(file_path_polars, use_pyarrow=False)
 
     return file_path_pandas, file_path_polars
 
