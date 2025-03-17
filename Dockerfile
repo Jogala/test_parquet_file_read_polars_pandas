@@ -16,8 +16,5 @@ RUN poetry config virtualenvs.create false
 # Install dependencies
 RUN poetry install --no-root
 
-# Copy all source files into the container
-COPY . .
-
 # Run the script when the container starts
 CMD ["sh", "-c", "python create_parquet_files.py && python test_read_parquet_file.py && python analysis_script.py"]

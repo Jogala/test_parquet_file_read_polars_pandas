@@ -65,6 +65,8 @@ def find_precision_violations(
                         precision_violated.append(
                             {
                                 "name_test": name_test,
+                                "length_1": len(data_1),
+                                "length_2": len(data_2),
                                 "data_1": data_1[mask].tolist(),
                                 "data_2": data_2[mask].tolist(),
                                 "i": i,
