@@ -43,8 +43,15 @@ def find_precision_violations(
         # Use tqdm to monitor repetitions per file
         for rep in tqdm(range(num_reps_per_file), desc=f"Reps for File {file_index}", leave=False):
             try:
-                df = read_parquet_file(path_file)
-                df = df.sort("date")
+                df: pl.DataFrame | pd.DataFrame = read_parquet_file(path_file)
+
+                if isinstance(df, pd.DataFrame):
+                    df = df.sort_values(by=["date"])
+                elif isinstance(df, pl.DataFrame):
+                    df = df.sort("date")
+                else:
+                    raise ValueError("Unknown DataFrame type")
+
             except Exception as e:
                 errors_reading_files.append(
                     {"name_test": name_test, "file_index": file_index, "rep": rep, "error": str(e)}
@@ -128,7 +135,7 @@ list_set_up = [
 
 rtol = 1e-7
 atol = 1e-10
-num_reps_per_file = 100
+num_reps_per_file = 50
 root_dir_results = Path("./results_check_parquet_file")
 shutil.rmtree(root_dir_results, ignore_errors=True)
 
