@@ -59,6 +59,9 @@ def find_precision_violations(
                     data_2 = np.asarray(previous_df[col_to_check][i])  # type: ignore
                     mask = ~np.isclose(data_1, data_2, rtol=rtol, atol=atol)
 
+                    if len(data_1) != len(data_2):
+                        raise ValueError("Lengths differ")
+
                     if np.any(mask):
                         tqdm.write(f"Precision violation found for {sum(mask)} elements")
 
