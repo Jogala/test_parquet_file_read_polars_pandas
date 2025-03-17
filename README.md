@@ -7,8 +7,7 @@ I skipped the option to use fastparquet as a backend with pandas as it is very s
 ## Build and Run in Docker
 You need to be in to root directory of this project, as we mount the project folder as a volume in the docker container
 ```bash
-docker build -t parquet_checker .
-docker run --rm -v $(pwd):/app -w /app parquet_checker
+docker build -t parquet_checker . && docker run --rm -v $(pwd):/app -w /app parquet_checker
 ```
 
 ## Run locally:
