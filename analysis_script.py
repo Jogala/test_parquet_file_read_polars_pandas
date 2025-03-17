@@ -72,3 +72,39 @@ for name_df_lib in ["polars", "pandas"]:
         print(df.select(cols).head(5))
         # print("tail")
         # print(df.select(cols).tail(5))
+
+
+# %%
+
+
+output_dir_results = root_dir_results / "polars"
+violations_file = output_dir_results / "all_violations.csv"
+violations_df = pl.read_csv(violations_file)
+
+violations_df = violations_df.with_columns(
+    pl.col("data_1").map_elements(lambda x: ast.literal_eval(x), return_dtype=pl.List(pl.Float64)),
+    pl.col("data_2").map_elements(lambda x: ast.literal_eval(x), return_dtype=pl.List(pl.Float64)),
+)
+
+violations_df = violations_df.with_columns(
+    pl.col("data_1").len().alias("len_data_1"),
+    pl.col("data_2").len().alias("len_data_2"),
+)
+
+if violations_df.filter(pl.col("len_data_1") != pl.col("len_data_2")).height > 0:
+    print("Lengths differ")
+
+violations_df = violations_df.drop("len_data_1").rename({"len_data_2": "num_violations"})
+
+tot_violations = (
+    violations_df.group_by("name_test")
+    .agg(pl.col("num_violations").sum().alias("total_violations"))
+    .sort("total_violations")
+)
+
+print(tot_violations)
+
+df = pl.read_parquet("synthetic_parquet_files/pandas/data_000.parquet")[12]
+print(violations_df)
+print(f"correct value, value1: {df['value'].to_numpy()[0][1125925]}")
+print(f"value in neighbouring col value2{df['value2'].to_numpy()[0][1125925]}")
